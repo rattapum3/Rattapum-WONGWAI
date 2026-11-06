@@ -1,0 +1,218 @@
+ /* เพิ่มคลาสนี้เข้าไปบนสุดของไฟล์ MainLayout.css */
+.app-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Sarabun', sans-serif;
+ }
+
+ :root {
+     --sidebar-collapsed: 70px;
+     --sidebar-expanded: 260px;
+     /* เปลี่ยนสีพื้นหลัง Sidebar เป็นสีขาว */
+     --sidebar-bg: #ffffff;
+     /* เปลี่ยนสีตอน Hover เมนูเป็นสีเทาอ่อน */
+     --sidebar-hover: #f0f0f0;
+     --ku-green: #03A96B;
+     /* สีเขียว มก. */
+     --ku-green-active: #03A96B;
+     /* สีเขียวสว่างสำหรับเมนูที่เลือก */
+     --bg-main: #f4f5f7;
+     /* เพิ่มตัวแปรสีข้อความ */
+     --text-dark: #333333;
+ }
+
+ app-wrapper {
+     display: flex;
+     min-height: 100vh;
+     background-color: var(--bg-main);
+     overflow-x: hidden;
+ }
+
+ /* ========================
+           Sidebar (แถบเมนูด้านซ้าย)
+           ======================== */
+ .sidebar {
+     position: fixed;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     width: var(--sidebar-collapsed);
+     background-color: var(--sidebar-bg);
+     /* เปลี่ยนสีข้อความหลักใน Sidebar เป็นสีดำ */
+     color: var(--text-dark);
+     z-index: 1000;
+     transition: width 0.3s ease;
+     white-space: nowrap;
+     overflow-x: hidden;
+     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+     /* เพิ่มเส้นขอบด้านขวาให้แยกกับเนื้อหาชัดเจน */
+     border-right: 1px solid #e0e0e0;
+ }
+
+ .sidebar.expanded {
+     width: var(--sidebar-expanded);
+ }
+
+ /* ส่วนหัว Sidebar */
+ .sidebar-header {
+     display: flex;
+     align-items: center;
+     /* ให้โลโก้อยู่ตรงกลางเสมอ */
+     justify-content: center;
+     padding: 15px;
+     border-bottom: 1px solid #f0f0f0;
+     height: 70px;
+     position: relative;
+     /* เพื่อให้ปุ่มสามขีดจัดตำแหน่งอ้างอิงจากกล่องนี้ */
+ }
+
+ /* ปรับแต่ง LOGO */
+ .sidebar-logo {
+     max-height: 90px;
+     /* จำกัดความสูง */
+     max-width: 100%;
+     /* ไม่ให้ล้นความกว้าง */
+     object-fit: contain;
+     transition: transform 0.3s;
+     margin-top: 30px;
+ }
+
+ .hamburger-btn {
+     background: none;
+     border: none;
+     /* เปลี่ยนไอคอนสามขีดเป็นสีดำ */
+     color: var(--text-dark);
+     font-size: 1.5rem;
+     cursor: pointer;
+     opacity: 0;
+     transition: opacity 0.2s;
+     /* ใช้ Absolute ผลักปุ่มสามขีดไปชิดขวาเสมอ โดยไม่เบียดโลโก้ */
+     position: absolute;
+     right: 15px;
+ }
+
+ .sidebar.expanded .hamburger-btn {
+     opacity: 1;
+     transition-delay: 0.1s;
+ }
+
+ .hamburger-btn:hover {
+     color: var(--ku-green-active);
+ }
+
+ /* เมนูต่างๆ */
+ .nav-list {
+     list-style: none;
+     margin-top: 25px;
+     padding: 10px 0;
+ }
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* <--- เพิ่มบรรทัดนี้เพื่อดันไอคอนกับข้อความให้ออกจากกัน */
+    padding: 12px 25px;
+    color: var(--text-dark); 
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+ .nav-item:hover {
+     background-color: var(--sidebar-hover);
+     color: var(--text-dark);
+ }
+
+ .nav-item.active {
+     background-color: var(--ku-green-active);
+     color: #fff;
+     /* เมนูที่เลือกยังคงตัวหนังสือสีขาวเพื่อให้ตัดกับพื้นเขียว */
+ }
+
+ .nav-icon {
+     font-size: 1.25rem;
+     min-width: 40px;
+ }
+
+ .nav-text {
+     opacity: 0;
+     transition: opacity 0.2s ease;
+ }
+
+ .sidebar.expanded .nav-text {
+     opacity: 1;
+     transition-delay: 0.1s;
+ }
+
+ /* ========================
+           Main Content (พื้นที่เนื้อหาหลัก)
+           ======================== */
+ .main-content {
+     flex: 1;
+     margin-left: var(--sidebar-collapsed);
+     display: flex;
+     flex-direction: column;
+     transition: margin-left 0.3s ease;
+ }
+
+ .main-content.pushed {
+     margin-left: var(--sidebar-expanded);
+ }
+
+ /* แถบสีเขียวด้านบน (Top Header) */
+.top-header {
+    background-color: var(--ku-green);
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* <--- บังคับให้ข้อความชิดซ้าย-ขวา */
+    padding: 0 30px;
+    width: 100%;
+}
+
+ /* จัดกลุ่มข้อมูลผู้ใช้งานและปุ่มออกจากระบบ */
+ .user-section {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+     font-size: 0.95rem;
+ }
+
+ .logout-btn {
+     color: white;
+     text-decoration: none;
+     display: flex;
+     align-items: center;
+     gap: 5px;
+     transition: 0.2s;
+     padding: 4px 8px;
+     border-radius: 4px;
+ }
+
+ /* เอฟเฟกต์ตอน Hover ปุ่มออกจากระบบ */
+ .logout-btn:hover {
+     background-color: rgba(255, 255, 255, 0.2);
+     color: #ffebee;
+     /* สีออกแดงสว่างนิดๆ */
+ }
+
+ .content-area {
+     padding: 30px;
+ }
+
+ .welcome-card {
+     background: white;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+     margin-bottom: 20px;
+ }

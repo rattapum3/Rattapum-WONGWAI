@@ -1,0 +1,28 @@
+/* src/index.css */
+/* นำเข้าฟอนต์ Noto Sans Thai จาก Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+
+/* บังคับใช้ฟอนต์นี้กับทุกส่วนของเว็บไซต์ */
+:root, body, * {
+  font-family: 'Noto Sans Thai', sans-serif !important;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Sarabun', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f4f5f7;
+  overflow-x: hidden;
+}
+
+/* บังคับให้ root ของ React กางเต็มจอ */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex; /* ให้ root เป็น flex container */
+}
